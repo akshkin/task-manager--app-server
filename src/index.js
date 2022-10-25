@@ -16,6 +16,10 @@ app.use(bodyParser.json())
 app.use(taskRouter)
 app.use(userRouter)
 
+app.get("/", (req, res) => {
+  res.send("Easy task!")
+})
+
 const CONNECTION_URL = process.env.CONNECTION_URL
 mongoose.connect(CONNECTION_URL)
   .then(() => app.listen(port, () => {
