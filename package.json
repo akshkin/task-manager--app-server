@@ -8,9 +8,9 @@
     "start" : "node src/index.js",
     "server" : "nodemon src/index.js",
     "client" : "npm start --prefix client/task-manager-client",
-    "cyclic-postbuild" : "NPM_CONFIG_PRODUCTION=false npm install --prefix client/task-manager-client && npm run build --prefix client/task-manager-client"
+    "postbuild" : "NPM_CONFIG_PRODUCTION=false npm install --prefix client/task-manager-client && npm run build --prefix client/task-manager-client"
   },
-  "author": "",
+  "author": "Akshaya Kini",
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
