@@ -5,6 +5,7 @@ const dotenv = require("dotenv")
 const taskRouter = require("../routes/task")
 const userRouter = require("../routes/user")
 const bodyParser = require("body-parser")
+const path = require("path")
 
 const app = express()
 dotenv.config()
@@ -16,9 +17,14 @@ app.use(bodyParser.json())
 app.use(taskRouter)
 app.use(userRouter)
 
-app.get("/", (req, res) => {
-  res.send("Easy task!")
-})
+//serve static assets in production
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static("client/task-manager-client/build"))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "task-manager-client", "build", "index.html"))
+  })
+}
 
 const CONNECTION_URL = process.env.CONNECTION_URL
 mongoose.connect(CONNECTION_URL)
